@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 import sweeper.Box;
+import sweeper.Coord;
+import sweeper.Ranges;
 
 public class JavaSweeper extends JFrame {
     private JPanel panel;
@@ -12,6 +14,7 @@ public class JavaSweeper extends JFrame {
         new JavaSweeper().setVisible(true);
     }
     private JavaSweeper(){
+        Ranges.setSize(new Coord(COLS, ROWS));
         setImages();
         initPanel();
         initFrame();
@@ -21,11 +24,13 @@ public class JavaSweeper extends JFrame {
             @Override
             protected void paintComponent(Graphics g){
                 super.paintComponent(g);
-                for(Box box : Box.values())
-                    g.drawImage((Image)box.image,box.ordinal() * IMAGE_SIZE,0,this);
+                for(Box box : Box.values()){
+                    Coord coord = new Coord(box.ordinal() * IMAGE_SIZE, 0);
+                    g.drawImage((Image)box.image, coord.x, coord.y,this);
+                }
             }
         };
-        panel.setPreferredSize(new Dimension(COLS * IMAGE_SIZE,ROWS * IMAGE_SIZE));
+        panel.setPreferredSize(new Dimension(Ranges.getSize().x * IMAGE_SIZE,Ranges.getSize().y * IMAGE_SIZE));
         add(panel);
     }
     private void initFrame(){
@@ -35,6 +40,7 @@ public class JavaSweeper extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
+        setIconImage(getImage("icon"));
     }
     private void setImages(){
         for(Box box : Box.values())

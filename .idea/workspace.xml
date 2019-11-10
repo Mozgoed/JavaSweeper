@@ -54,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JAR Application.JavaSweeper.jar">
+  <component name="RunManager" selected="Application.JavaSweeper">
     <configuration name="JavaSweeper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="JavaSweeper" />
       <module name="JavaSweeper" />
@@ -68,8 +68,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.JavaSweeper.jar" />
         <item itemvalue="Application.JavaSweeper" />
+        <item itemvalue="JAR Application.JavaSweeper.jar" />
       </list>
     </recent_temporary>
   </component>
