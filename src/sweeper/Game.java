@@ -8,7 +8,7 @@ public class Game {
         bomb = new Bomb(bombs);
     }
 
-    public void start(){
+    public void start() {
         bomb.start();
     }
 
