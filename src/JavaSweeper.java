@@ -16,6 +16,12 @@ public class JavaSweeper extends JFrame {
     private final int ROWS = 9;
     private final int BOMBS = 5;
     private final int IMAGE_SIZE = 50;
+    private JLabel label;
+
+    private void initLabel() {
+        label = new JLabel("Welcome!");
+        add(label,BorderLayout.SOUTH);
+    }
 
     public static void main(String[] args) {
         new JavaSweeper().setVisible(true);
@@ -25,6 +31,7 @@ public class JavaSweeper extends JFrame {
         game = new Game(COLS, ROWS, BOMBS);
         game.start();
         setImages();
+        initLabel();
         initPanel();
         initFrame();
     }
@@ -45,9 +52,14 @@ public class JavaSweeper extends JFrame {
             public void mousePressed(MouseEvent e) {
                 int x = e.getX() / IMAGE_SIZE;
                 int y = e.getY() / IMAGE_SIZE;
-                Coord coord = new Coord(x,y);
-                if(e.getButton()== MouseEvent.BUTTON1)
+                Coord coord = new Coord(x, y);
+                if (e.getButton() == MouseEvent.BUTTON1)
                     game.pressLeftButton(coord);
+                if (e.getButton() == MouseEvent.BUTTON3)
+                    game.pressRightButton(coord);
+                if (e.getButton() == MouseEvent.BUTTON2)
+                    game.start();
+                label.setText(getMessage());
                 panel.repaint();
             }
         });
@@ -58,12 +70,12 @@ public class JavaSweeper extends JFrame {
 
     private void initFrame() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Miner - https://www.youtube.com/watch?v=PcZYF0g49gM");
-        setLocationRelativeTo(null);
+        setTitle("Miner");
         setResizable(false);
         setVisible(true);
-        setIconImage(getImage("icon"));
         pack();
+        setLocationRelativeTo(null);//Окно по центру
+        setIconImage(getImage("icon"));
     }
 
     private void setImages() {
@@ -76,5 +88,15 @@ public class JavaSweeper extends JFrame {
         ImageIcon icon = new ImageIcon(getClass().getResource(filename));
         return icon.getImage();
     }
+
+    private String getMessage() {
+        switch (game.getState()){
+            case PLAYED:return "Think twice!";
+            case BOMBED:return "Booom!";
+            case WINNER:return "You are WINNER!";
+            default:return "Welcome!";
+        }
+    }
 }
-//2:10:26
+
+//https://www.youtube.com/watch?v=PcZYF0g49gM
